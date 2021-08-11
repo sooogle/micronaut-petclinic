@@ -1,0 +1,32 @@
+micronaut:
+  application:
+    name: petclinic
+  server:
+    netty:
+      access-logger:
+        enabled: true
+        logger-name: HTTP_ACCESS_LOGGER
+        log-format: common
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+      swagger-ui:
+        paths: classpath:META-INF/swagger/views/swagger-ui
+        mapping: /swagger-ui/**
+datasources:
+  default:
+    url: ${DB_URL:`jdbc:postgresql://localhost:5432/petclinic`}
+    driverClassName: org.postgresql.Driver
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:password}
+jackson:
+  serialization-inclusion: ALWAYS
+  serialization:
+    write-dates-as-timestamps: false
+flyway:
+  datasources:
+    default:
+      enabled: true
+      clean-on-validation-error: true

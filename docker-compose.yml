@@ -1,0 +1,31 @@
+services:
+  web:
+    image: openjdk:16-alpine
+    working_dir: /app
+    volumes:
+      - ./:/app:delegated
+      - gradle:/home/.gradle
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_URL=jdbc:postgresql://db:5432/petclinic
+      - GRADLE_USER_HOME=/home/.gradle
+    command: ./gradlew run
+    depends_on:
+      - db
+  db:
+    image: postgres:12-alpine
+    volumes:
+      - db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=petclinic
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    command: postgres -c fsync=off -c full_page_writes=off -c synchronous_commit=off
+volumes:
+  gradle:
+    driver: local
+  db:
+    driver: local
