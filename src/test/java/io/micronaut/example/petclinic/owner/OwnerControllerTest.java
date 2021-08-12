@@ -48,13 +48,13 @@ public class OwnerControllerTest {
 
     @Test
     void testFindAll() {
-        var response = client.findByLastName(null);
+        var response = client.findAll(null);
         assertThat(response).hasSize((int) ownerRepository.count());
     }
 
     @Test
     void testFindByLastName() {
-        var response = client.findByLastName("d");
+        var response = client.findAll("d");
         var expected = (int) ownerRepository.findAll().stream()
             .filter(x -> x.getLastName().toLowerCase().startsWith("d")).count();
         assertThat(response).hasSize(expected);
@@ -100,7 +100,7 @@ public class OwnerControllerTest {
     interface OwnerClient {
 
         @Get
-        List<OwnerDTO> findByLastName(@Nullable @QueryValue String lastName);
+        List<OwnerDTO> findAll(@Nullable @QueryValue String lastName);
 
         @Get("/{id}")
         OwnerDTO findOne(Integer id);

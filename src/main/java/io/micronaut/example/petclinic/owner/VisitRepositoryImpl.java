@@ -34,4 +34,5 @@ public class VisitRepositoryImpl extends DAOImpl<VisitsRecord, Visits, Integer> 
     public Integer getId(Visits object) {
         return object.getId();
     }
+
 }

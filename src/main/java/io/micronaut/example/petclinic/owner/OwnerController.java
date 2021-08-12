@@ -25,9 +25,12 @@ import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.Put;
 import io.micronaut.http.annotation.QueryValue;
+import io.micronaut.transaction.TransactionDefinition.Propagation;
+import io.micronaut.transaction.annotation.TransactionalAdvice;
 import io.micronaut.validation.Validated;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @Validated
@@ -47,18 +50,21 @@ class OwnerController {
 
     @Get
     @Operation(operationId = "findAllOwners", summary = "Find all owners")
+    @TransactionalAdvice(readOnly = true)
     public List<OwnerDTO> findAll(@Nullable @QueryValue String lastName) {
         return ownerRepository.findAll(lastName);
     }
 
     @Get("/{id}")
     @Operation(operationId = "findOneOwner", summary = "Find an owner by his/her id")
+    @TransactionalAdvice(readOnly = true, propagation = Propagation.REQUIRES_NEW)
     public OwnerDTO findOne(Integer id) {
         return ownerRepository.findOne(id);
     }
 
     @Post
     @Operation(operationId = "createOwner", summary = "Create an owner")
+    @TransactionalAdvice
     public Owners create(@Valid @Body OwnerRequest request) {
         var owner = request.toEntity();
         ownerRepository.insert(owner);
@@ -67,6 +73,7 @@ class OwnerController {
 
     @Put("/{id}")
     @Operation(operationId = "updateOwner", summary = "Update an owner")
+    @TransactionalAdvice
     public Owners update(Integer id, @Valid @Body OwnerRequest request) {
         var owner = request.toEntity(id);
         ownerRepository.update(owner);
@@ -75,6 +82,7 @@ class OwnerController {
 
     @Post("/{id}/pets")
     @Operation(operationId = "createPet", summary = "Create a pet")
+    @TransactionalAdvice
     public Pets createPet(Integer id, @Valid @Body PetRequest request) {
         var pet = request.toEntity(id);
         petRepository.insert(pet);
@@ -83,6 +91,7 @@ class OwnerController {
 
     @Put("/{id}/pets/{petId}")
     @Operation(operationId = "updatePet", summary = "Update a pet")
+    @TransactionalAdvice
     public Pets updatePet(Integer id, Integer petId, @Valid @Body PetRequest request) {
         var pet = request.toEntity(petId, id);
         petRepository.update(pet);
@@ -92,6 +101,7 @@ class OwnerController {
     @SuppressWarnings("unused")
     @Post("/{id}/pets/{petId}/visits")
     @Operation(operationId = "createVisit", summary = "Make a visit reservation")
+    @TransactionalAdvice
     public Visits createVisit(Integer id, Integer petId, @Valid @Body VisitRequest request) {
         var visit = request.toEntity(petId);
         visitRepository.insert(visit);

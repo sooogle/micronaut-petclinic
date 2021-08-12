@@ -35,4 +35,5 @@ public record OwnerDTO(@Schema(description = "The id of the owner") Integer id,
                                 @Schema(description = "The type name of the pet") String typeName) {
 
     }
+
 }

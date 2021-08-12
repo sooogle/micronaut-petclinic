@@ -19,14 +19,22 @@ import io.micronaut.core.annotation.Nullable;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.QueryValue;
+import io.micronaut.transaction.annotation.TransactionalAdvice;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 
 @Controller("/api/vets")
-public record VetController(VetRepository repository) {
+public class VetController {
+
+    private final VetRepository repository;
+
+    public VetController(VetRepository repository) {
+        this.repository = repository;
+    }
 
     @Get
     @Operation(operationId = "findAllVets", summary = "Find all vets.")
+    @TransactionalAdvice(readOnly = true)
     public List<VetDTO> findAll(@Nullable @QueryValue String lastName, @Nullable @QueryValue Integer specialityId) {
         return repository.findAll(lastName, specialityId);
     }

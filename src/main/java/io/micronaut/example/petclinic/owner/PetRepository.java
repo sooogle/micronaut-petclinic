@@ -22,4 +22,5 @@ public interface PetRepository {
     void insert(Pets pets);
 
     void update(Pets pets);
+
 }

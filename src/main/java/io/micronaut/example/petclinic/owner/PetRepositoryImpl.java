@@ -34,4 +34,5 @@ public class PetRepositoryImpl extends DAOImpl<PetsRecord, Pets, Integer> implem
     public Integer getId(Pets object) {
         return object.getId();
     }
+
 }
