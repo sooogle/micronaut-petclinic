@@ -25,12 +25,10 @@ import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.Put;
 import io.micronaut.http.annotation.QueryValue;
-import io.micronaut.transaction.TransactionDefinition.Propagation;
 import io.micronaut.transaction.annotation.TransactionalAdvice;
 import io.micronaut.validation.Validated;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @Validated
@@ -57,7 +55,7 @@ class OwnerController {
 
     @Get("/{id}")
     @Operation(operationId = "findOneOwner", summary = "Find an owner by his/her id")
-    @TransactionalAdvice(readOnly = true, propagation = Propagation.REQUIRES_NEW)
+    @TransactionalAdvice(readOnly = true)
     public OwnerDTO findOne(Integer id) {
         return ownerRepository.findOne(id);
     }
