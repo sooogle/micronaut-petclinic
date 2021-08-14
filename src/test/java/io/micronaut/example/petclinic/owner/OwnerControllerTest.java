@@ -44,7 +44,7 @@ public class OwnerControllerTest {
     OwnerRepository ownerRepository;
 
     @Inject
-    VisitRepositoryImpl visitRepository;
+    VisitRepository visitRepository;
 
     @Test
     void testFindAll() {
