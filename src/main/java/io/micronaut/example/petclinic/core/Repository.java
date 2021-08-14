@@ -13,11 +13,14 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package io.micronaut.example.petclinic.owner;
+package io.micronaut.example.petclinic.core;
 
-import io.micronaut.example.petclinic.core.JooqRepository;
-import io.micronaut.example.petclinic.tables.pojos.Pets;
-
-public interface PetRepository extends JooqRepository<Pets, Integer> {
+/**
+ * Parent repository interface for all repositories.
+ *
+ * @param <E>  The entity type
+ * @param <ID> The ID type
+ */
+public interface Repository<E, ID> {
 
 }

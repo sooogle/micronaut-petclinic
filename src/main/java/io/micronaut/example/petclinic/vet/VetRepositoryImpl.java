@@ -18,11 +18,13 @@ package io.micronaut.example.petclinic.vet;
 import static io.micronaut.example.petclinic.Tables.VETS;
 import static io.micronaut.example.petclinic.Tables.VET_SPECIALTIES;
 import static org.jooq.Records.mapping;
+import static org.jooq.impl.DSL.exists;
 import static org.jooq.impl.DSL.multiset;
 import static org.jooq.impl.DSL.select;
 import static org.jooq.impl.DSL.selectOne;
 
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.example.petclinic.core.AbstractJooqRepository;
 import io.micronaut.example.petclinic.tables.pojos.Vets;
 import io.micronaut.example.petclinic.tables.records.VetsRecord;
 import io.micronaut.example.petclinic.vet.VetDTO.SpecialityDTO;
@@ -31,11 +33,9 @@ import java.util.List;
 import javax.inject.Singleton;
 import org.jooq.Condition;
 import org.jooq.Configuration;
-import org.jooq.impl.DAOImpl;
-import org.jooq.impl.DSL;
 
 @Singleton
-public class VetRepositoryImpl extends DAOImpl<VetsRecord, Vets, Integer> implements VetRepository {
+public class VetRepositoryImpl extends AbstractJooqRepository<VetsRecord, Vets, Integer> implements VetRepository {
 
     public VetRepositoryImpl(Configuration configuration) {
         super(VETS, Vets.class, configuration);
@@ -54,7 +54,7 @@ public class VetRepositoryImpl extends DAOImpl<VetsRecord, Vets, Integer> implem
         }
         if (specialityId != null) {
             conditions.add(
-                DSL.exists(
+                exists(
                     selectOne()
                         .from(VET_SPECIALTIES)
                         .where(VET_SPECIALTIES.VET_ID.eq(VETS.ID)

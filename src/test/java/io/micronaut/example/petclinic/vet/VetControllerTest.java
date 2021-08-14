@@ -33,11 +33,11 @@ public class VetControllerTest {
     VetClient client;
 
     @Inject
-    VetRepositoryImpl repository;
+    VetRepository repository;
 
     @Test
     void testFindAll() {
-        var response = client.findAll(null, null);
+        var response = client.findAll( null, null);
         assertThat(response).hasSize((int) repository.count());
     }
 

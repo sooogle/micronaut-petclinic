@@ -23,6 +23,7 @@ import static org.jooq.impl.DSL.multiset;
 import static org.jooq.impl.DSL.select;
 
 import io.micronaut.core.util.StringUtils;
+import io.micronaut.example.petclinic.core.AbstractJooqRepository;
 import io.micronaut.example.petclinic.tables.pojos.Owners;
 import io.micronaut.example.petclinic.tables.records.OwnersRecord;
 import java.util.ArrayList;
@@ -32,10 +33,9 @@ import org.jooq.Condition;
 import org.jooq.Configuration;
 import org.jooq.Record7;
 import org.jooq.SelectJoinStep;
-import org.jooq.impl.DAOImpl;
 
 @Singleton
-public class OwnerRepositoryImpl extends DAOImpl<OwnersRecord, Owners, Integer> implements OwnerRepository {
+public class OwnerRepositoryImpl extends AbstractJooqRepository<OwnersRecord, Owners, Integer> implements OwnerRepository {
 
     protected OwnerRepositoryImpl(Configuration configuration) {
         super(OWNERS, Owners.class, configuration);

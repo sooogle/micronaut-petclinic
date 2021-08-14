@@ -15,9 +15,11 @@
  */
 package io.micronaut.example.petclinic.vet;
 
+import io.micronaut.example.petclinic.core.JooqRepository;
+import io.micronaut.example.petclinic.tables.pojos.Vets;
 import java.util.List;
 
-public interface VetRepository {
+public interface VetRepository extends JooqRepository<Vets, Integer> {
 
     List<VetDTO> findAll(String lastName, Integer specialityId);
 

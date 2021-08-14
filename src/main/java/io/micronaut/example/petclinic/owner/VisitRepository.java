@@ -15,10 +15,9 @@
  */
 package io.micronaut.example.petclinic.owner;
 
+import io.micronaut.example.petclinic.core.JooqRepository;
 import io.micronaut.example.petclinic.tables.pojos.Visits;
 
-public interface VisitRepository {
-
-    void insert(Visits visits);
+public interface VisitRepository extends JooqRepository<Visits, Integer> {
 
 }

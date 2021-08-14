@@ -65,8 +65,7 @@ class OwnerController {
     @TransactionalAdvice
     public Owners create(@Valid @Body OwnerRequest request) {
         var owner = request.toEntity();
-        ownerRepository.insert(owner);
-        return owner;
+        return ownerRepository.save(owner);
     }
 
     @Put("/{id}")
@@ -74,8 +73,7 @@ class OwnerController {
     @TransactionalAdvice
     public Owners update(Integer id, @Valid @Body OwnerRequest request) {
         var owner = request.toEntity(id);
-        ownerRepository.update(owner);
-        return owner;
+        return ownerRepository.update(owner);
     }
 
     @Post("/{id}/pets")
@@ -83,8 +81,7 @@ class OwnerController {
     @TransactionalAdvice
     public Pets createPet(Integer id, @Valid @Body PetRequest request) {
         var pet = request.toEntity(id);
-        petRepository.insert(pet);
-        return pet;
+        return petRepository.save(pet);
     }
 
     @Put("/{id}/pets/{petId}")
@@ -102,8 +99,7 @@ class OwnerController {
     @TransactionalAdvice
     public Visits createVisit(Integer id, Integer petId, @Valid @Body VisitRequest request) {
         var visit = request.toEntity(petId);
-        visitRepository.insert(visit);
-        return visit;
+        return visitRepository.save(visit);
     }
 
 }

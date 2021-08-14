@@ -15,17 +15,14 @@
  */
 package io.micronaut.example.petclinic.owner;
 
+import io.micronaut.example.petclinic.core.JooqRepository;
 import io.micronaut.example.petclinic.tables.pojos.Owners;
 import java.util.List;
 
-public interface OwnerRepository {
+public interface OwnerRepository extends JooqRepository<Owners, Integer> {
 
     OwnerDTO findOne(Integer id);
 
     List<OwnerDTO> findAll(String lastName);
-
-    void insert(Owners owners);
-
-    void update(Owners owners);
 
 }

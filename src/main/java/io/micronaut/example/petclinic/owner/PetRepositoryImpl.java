@@ -17,14 +17,14 @@ package io.micronaut.example.petclinic.owner;
 
 import static io.micronaut.example.petclinic.Tables.PETS;
 
+import io.micronaut.example.petclinic.core.AbstractJooqRepository;
 import io.micronaut.example.petclinic.tables.pojos.Pets;
 import io.micronaut.example.petclinic.tables.records.PetsRecord;
 import javax.inject.Singleton;
 import org.jooq.Configuration;
-import org.jooq.impl.DAOImpl;
 
 @Singleton
-public class PetRepositoryImpl extends DAOImpl<PetsRecord, Pets, Integer> implements PetRepository {
+public class PetRepositoryImpl extends AbstractJooqRepository<PetsRecord, Pets, Integer> implements PetRepository {
 
     protected PetRepositoryImpl(Configuration configuration) {
         super(PETS, Pets.class, configuration);

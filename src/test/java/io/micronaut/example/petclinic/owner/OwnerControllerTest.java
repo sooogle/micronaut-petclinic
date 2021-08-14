@@ -41,7 +41,7 @@ public class OwnerControllerTest {
     OwnerClient client;
 
     @Inject
-    OwnerRepositoryImpl ownerRepository;
+    OwnerRepository ownerRepository;
 
     @Inject
     VisitRepositoryImpl visitRepository;
