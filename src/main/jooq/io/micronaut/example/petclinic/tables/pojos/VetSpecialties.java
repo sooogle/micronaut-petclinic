@@ -5,6 +5,7 @@ package io.micronaut.example.petclinic.tables.pojos;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 
 /**
@@ -15,22 +16,30 @@ public class VetSpecialties implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer vetId;
-    private Integer specialtyId;
+    private Integer       vetId;
+    private Integer       specialtyId;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public VetSpecialties() {}
 
     public VetSpecialties(VetSpecialties value) {
         this.vetId = value.vetId;
         this.specialtyId = value.specialtyId;
+        this.createdAt = value.createdAt;
+        this.updatedAt = value.updatedAt;
     }
 
     public VetSpecialties(
-        Integer vetId,
-        Integer specialtyId
+        Integer       vetId,
+        Integer       specialtyId,
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
     ) {
         this.vetId = vetId;
         this.specialtyId = specialtyId;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     /**
@@ -63,12 +72,44 @@ public class VetSpecialties implements Serializable {
         return this;
     }
 
+    /**
+     * Getter for <code>public.vet_specialties.created_at</code>.
+     */
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    /**
+     * Setter for <code>public.vet_specialties.created_at</code>.
+     */
+    public VetSpecialties setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    /**
+     * Getter for <code>public.vet_specialties.updated_at</code>.
+     */
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    /**
+     * Setter for <code>public.vet_specialties.updated_at</code>.
+     */
+    public VetSpecialties setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+        return this;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("VetSpecialties (");
 
         sb.append(vetId);
         sb.append(", ").append(specialtyId);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(updatedAt);
 
         sb.append(")");
         return sb.toString();

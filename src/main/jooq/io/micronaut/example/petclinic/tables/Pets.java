@@ -10,6 +10,7 @@ import io.micronaut.example.petclinic.Public;
 import io.micronaut.example.petclinic.tables.records.PetsRecord;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row5;
+import org.jooq.Row7;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -59,12 +60,12 @@ public class Pets extends TableImpl<PetsRecord> {
     /**
      * The column <code>public.pets.name</code>.
      */
-    public final TableField<PetsRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(30), this, "");
+    public final TableField<PetsRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(30).nullable(false), this, "");
 
     /**
      * The column <code>public.pets.birth_date</code>.
      */
-    public final TableField<PetsRecord, LocalDate> BIRTH_DATE = createField(DSL.name("birth_date"), SQLDataType.LOCALDATE, this, "");
+    public final TableField<PetsRecord, LocalDate> BIRTH_DATE = createField(DSL.name("birth_date"), SQLDataType.LOCALDATE.nullable(false), this, "");
 
     /**
      * The column <code>public.pets.type_id</code>.
@@ -75,6 +76,16 @@ public class Pets extends TableImpl<PetsRecord> {
      * The column <code>public.pets.owner_id</code>.
      */
     public final TableField<PetsRecord, Integer> OWNER_ID = createField(DSL.name("owner_id"), SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>public.pets.created_at</code>.
+     */
+    public final TableField<PetsRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_DATE", SQLDataType.LOCALDATETIME)), this, "");
+
+    /**
+     * The column <code>public.pets.updated_at</code>.
+     */
+    public final TableField<PetsRecord, LocalDateTime> UPDATED_AT = createField(DSL.name("updated_at"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_DATE", SQLDataType.LOCALDATETIME)), this, "");
 
     private Pets(Name alias, Table<PetsRecord> aliased) {
         this(alias, aliased, null);
@@ -178,11 +189,11 @@ public class Pets extends TableImpl<PetsRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row5 type methods
+    // Row7 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<Integer, String, LocalDate, Integer, Integer> fieldsRow() {
-        return (Row5) super.fieldsRow();
+    public Row7<Integer, String, LocalDate, Integer, Integer, LocalDateTime, LocalDateTime> fieldsRow() {
+        return (Row7) super.fieldsRow();
     }
 }

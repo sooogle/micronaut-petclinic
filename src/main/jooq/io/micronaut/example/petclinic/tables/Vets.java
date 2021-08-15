@@ -9,6 +9,7 @@ import io.micronaut.example.petclinic.Keys;
 import io.micronaut.example.petclinic.Public;
 import io.micronaut.example.petclinic.tables.records.VetsRecord;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row3;
+import org.jooq.Row5;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -58,12 +59,22 @@ public class Vets extends TableImpl<VetsRecord> {
     /**
      * The column <code>public.vets.first_name</code>.
      */
-    public final TableField<VetsRecord, String> FIRST_NAME = createField(DSL.name("first_name"), SQLDataType.VARCHAR(30), this, "");
+    public final TableField<VetsRecord, String> FIRST_NAME = createField(DSL.name("first_name"), SQLDataType.VARCHAR(30).nullable(false), this, "");
 
     /**
      * The column <code>public.vets.last_name</code>.
      */
-    public final TableField<VetsRecord, String> LAST_NAME = createField(DSL.name("last_name"), SQLDataType.VARCHAR(30), this, "");
+    public final TableField<VetsRecord, String> LAST_NAME = createField(DSL.name("last_name"), SQLDataType.VARCHAR(30).nullable(false), this, "");
+
+    /**
+     * The column <code>public.vets.created_at</code>.
+     */
+    public final TableField<VetsRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_DATE", SQLDataType.LOCALDATETIME)), this, "");
+
+    /**
+     * The column <code>public.vets.updated_at</code>.
+     */
+    public final TableField<VetsRecord, LocalDateTime> UPDATED_AT = createField(DSL.name("updated_at"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_DATE", SQLDataType.LOCALDATETIME)), this, "");
 
     private Vets(Name alias, Table<VetsRecord> aliased) {
         this(alias, aliased, null);
@@ -145,11 +156,11 @@ public class Vets extends TableImpl<VetsRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row3 type methods
+    // Row5 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row3<Integer, String, String> fieldsRow() {
-        return (Row3) super.fieldsRow();
+    public Row5<Integer, String, String, LocalDateTime, LocalDateTime> fieldsRow() {
+        return (Row5) super.fieldsRow();
     }
 }

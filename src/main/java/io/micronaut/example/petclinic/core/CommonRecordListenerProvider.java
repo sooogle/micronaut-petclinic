@@ -13,21 +13,18 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package io.micronaut.example.petclinic.owner;
+package io.micronaut.example.petclinic.core;
 
-import io.micronaut.core.annotation.Introspected;
-import io.micronaut.example.petclinic.tables.pojos.Visits;
-import java.time.LocalDate;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.inject.Named;
+import javax.inject.Singleton;
+import org.jooq.RecordListener;
+import org.jooq.impl.DefaultRecordListenerProvider;
 
-@Introspected
-public record VisitRequest(@NotNull @Future LocalDate visitDate,
-                           @Size(max = 255) String description) {
+@Named("default") // for the "default" datasource
+@Singleton
+public class CommonRecordListenerProvider extends DefaultRecordListenerProvider {
 
-    public Visits toEntity(Integer petId) {
-        return new Visits(null, petId, visitDate, description, null, null);
+    public CommonRecordListenerProvider(RecordListener listener) {
+        super(listener);
     }
-
 }

@@ -10,6 +10,7 @@ import io.micronaut.example.petclinic.Public;
 import io.micronaut.example.petclinic.tables.records.VisitsRecord;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row4;
+import org.jooq.Row6;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -64,12 +65,22 @@ public class Visits extends TableImpl<VisitsRecord> {
     /**
      * The column <code>public.visits.visit_date</code>.
      */
-    public final TableField<VisitsRecord, LocalDate> VISIT_DATE = createField(DSL.name("visit_date"), SQLDataType.LOCALDATE, this, "");
+    public final TableField<VisitsRecord, LocalDate> VISIT_DATE = createField(DSL.name("visit_date"), SQLDataType.LOCALDATE.nullable(false), this, "");
 
     /**
      * The column <code>public.visits.description</code>.
      */
     public final TableField<VisitsRecord, String> DESCRIPTION = createField(DSL.name("description"), SQLDataType.VARCHAR(255), this, "");
+
+    /**
+     * The column <code>public.visits.created_at</code>.
+     */
+    public final TableField<VisitsRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_DATE", SQLDataType.LOCALDATETIME)), this, "");
+
+    /**
+     * The column <code>public.visits.updated_at</code>.
+     */
+    public final TableField<VisitsRecord, LocalDateTime> UPDATED_AT = createField(DSL.name("updated_at"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_DATE", SQLDataType.LOCALDATETIME)), this, "");
 
     private Visits(Name alias, Table<VisitsRecord> aliased) {
         this(alias, aliased, null);
@@ -165,11 +176,11 @@ public class Visits extends TableImpl<VisitsRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row4 type methods
+    // Row6 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Integer, Integer, LocalDate, String> fieldsRow() {
-        return (Row4) super.fieldsRow();
+    public Row6<Integer, Integer, LocalDate, String, LocalDateTime, LocalDateTime> fieldsRow() {
+        return (Row6) super.fieldsRow();
     }
 }

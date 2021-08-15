@@ -5,6 +5,7 @@ package io.micronaut.example.petclinic.tables.pojos;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 
 /**
@@ -15,12 +16,14 @@ public class Owners implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
-    private String  firstName;
-    private String  lastName;
-    private String  address;
-    private String  city;
-    private String  telephone;
+    private Integer       id;
+    private String        firstName;
+    private String        lastName;
+    private String        address;
+    private String        city;
+    private String        telephone;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Owners() {}
 
@@ -31,15 +34,19 @@ public class Owners implements Serializable {
         this.address = value.address;
         this.city = value.city;
         this.telephone = value.telephone;
+        this.createdAt = value.createdAt;
+        this.updatedAt = value.updatedAt;
     }
 
     public Owners(
-        Integer id,
-        String  firstName,
-        String  lastName,
-        String  address,
-        String  city,
-        String  telephone
+        Integer       id,
+        String        firstName,
+        String        lastName,
+        String        address,
+        String        city,
+        String        telephone,
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
     ) {
         this.id = id;
         this.firstName = firstName;
@@ -47,6 +54,8 @@ public class Owners implements Serializable {
         this.address = address;
         this.city = city;
         this.telephone = telephone;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     /**
@@ -139,6 +148,36 @@ public class Owners implements Serializable {
         return this;
     }
 
+    /**
+     * Getter for <code>public.owners.created_at</code>.
+     */
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    /**
+     * Setter for <code>public.owners.created_at</code>.
+     */
+    public Owners setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    /**
+     * Getter for <code>public.owners.updated_at</code>.
+     */
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    /**
+     * Setter for <code>public.owners.updated_at</code>.
+     */
+    public Owners setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+        return this;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Owners (");
@@ -149,6 +188,8 @@ public class Owners implements Serializable {
         sb.append(", ").append(address);
         sb.append(", ").append(city);
         sb.append(", ").append(telephone);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(updatedAt);
 
         sb.append(")");
         return sb.toString();

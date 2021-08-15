@@ -6,6 +6,7 @@ package io.micronaut.example.petclinic.tables.pojos;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 /**
@@ -16,10 +17,12 @@ public class Visits implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer   id;
-    private Integer   petId;
-    private LocalDate visitDate;
-    private String    description;
+    private Integer       id;
+    private Integer       petId;
+    private LocalDate     visitDate;
+    private String        description;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Visits() {}
 
@@ -28,18 +31,24 @@ public class Visits implements Serializable {
         this.petId = value.petId;
         this.visitDate = value.visitDate;
         this.description = value.description;
+        this.createdAt = value.createdAt;
+        this.updatedAt = value.updatedAt;
     }
 
     public Visits(
-        Integer   id,
-        Integer   petId,
-        LocalDate visitDate,
-        String    description
+        Integer       id,
+        Integer       petId,
+        LocalDate     visitDate,
+        String        description,
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
     ) {
         this.id = id;
         this.petId = petId;
         this.visitDate = visitDate;
         this.description = description;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     /**
@@ -102,6 +111,36 @@ public class Visits implements Serializable {
         return this;
     }
 
+    /**
+     * Getter for <code>public.visits.created_at</code>.
+     */
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    /**
+     * Setter for <code>public.visits.created_at</code>.
+     */
+    public Visits setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    /**
+     * Getter for <code>public.visits.updated_at</code>.
+     */
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    /**
+     * Setter for <code>public.visits.updated_at</code>.
+     */
+    public Visits setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+        return this;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Visits (");
@@ -110,6 +149,8 @@ public class Visits implements Serializable {
         sb.append(", ").append(petId);
         sb.append(", ").append(visitDate);
         sb.append(", ").append(description);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(updatedAt);
 
         sb.append(")");
         return sb.toString();

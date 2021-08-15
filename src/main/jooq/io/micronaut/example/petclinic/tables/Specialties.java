@@ -9,6 +9,7 @@ import io.micronaut.example.petclinic.Keys;
 import io.micronaut.example.petclinic.Public;
 import io.micronaut.example.petclinic.tables.records.SpecialtiesRecord;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row2;
+import org.jooq.Row4;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -58,7 +59,17 @@ public class Specialties extends TableImpl<SpecialtiesRecord> {
     /**
      * The column <code>public.specialties.name</code>.
      */
-    public final TableField<SpecialtiesRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(80), this, "");
+    public final TableField<SpecialtiesRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(80).nullable(false), this, "");
+
+    /**
+     * The column <code>public.specialties.created_at</code>.
+     */
+    public final TableField<SpecialtiesRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_DATE", SQLDataType.LOCALDATETIME)), this, "");
+
+    /**
+     * The column <code>public.specialties.updated_at</code>.
+     */
+    public final TableField<SpecialtiesRecord, LocalDateTime> UPDATED_AT = createField(DSL.name("updated_at"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_DATE", SQLDataType.LOCALDATETIME)), this, "");
 
     private Specialties(Name alias, Table<SpecialtiesRecord> aliased) {
         this(alias, aliased, null);
@@ -140,11 +151,11 @@ public class Specialties extends TableImpl<SpecialtiesRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row2 type methods
+    // Row4 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row2<Integer, String> fieldsRow() {
-        return (Row2) super.fieldsRow();
+    public Row4<Integer, String, LocalDateTime, LocalDateTime> fieldsRow() {
+        return (Row4) super.fieldsRow();
     }
 }

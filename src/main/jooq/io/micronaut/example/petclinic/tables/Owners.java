@@ -9,6 +9,7 @@ import io.micronaut.example.petclinic.Keys;
 import io.micronaut.example.petclinic.Public;
 import io.micronaut.example.petclinic.tables.records.OwnersRecord;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row6;
+import org.jooq.Row8;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -58,27 +59,37 @@ public class Owners extends TableImpl<OwnersRecord> {
     /**
      * The column <code>public.owners.first_name</code>.
      */
-    public final TableField<OwnersRecord, String> FIRST_NAME = createField(DSL.name("first_name"), SQLDataType.VARCHAR(30), this, "");
+    public final TableField<OwnersRecord, String> FIRST_NAME = createField(DSL.name("first_name"), SQLDataType.VARCHAR(30).nullable(false), this, "");
 
     /**
      * The column <code>public.owners.last_name</code>.
      */
-    public final TableField<OwnersRecord, String> LAST_NAME = createField(DSL.name("last_name"), SQLDataType.VARCHAR(30), this, "");
+    public final TableField<OwnersRecord, String> LAST_NAME = createField(DSL.name("last_name"), SQLDataType.VARCHAR(30).nullable(false), this, "");
 
     /**
      * The column <code>public.owners.address</code>.
      */
-    public final TableField<OwnersRecord, String> ADDRESS = createField(DSL.name("address"), SQLDataType.VARCHAR(255), this, "");
+    public final TableField<OwnersRecord, String> ADDRESS = createField(DSL.name("address"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
      * The column <code>public.owners.city</code>.
      */
-    public final TableField<OwnersRecord, String> CITY = createField(DSL.name("city"), SQLDataType.VARCHAR(80), this, "");
+    public final TableField<OwnersRecord, String> CITY = createField(DSL.name("city"), SQLDataType.VARCHAR(80).nullable(false), this, "");
 
     /**
      * The column <code>public.owners.telephone</code>.
      */
-    public final TableField<OwnersRecord, String> TELEPHONE = createField(DSL.name("telephone"), SQLDataType.VARCHAR(20), this, "");
+    public final TableField<OwnersRecord, String> TELEPHONE = createField(DSL.name("telephone"), SQLDataType.VARCHAR(20).nullable(false), this, "");
+
+    /**
+     * The column <code>public.owners.created_at</code>.
+     */
+    public final TableField<OwnersRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_DATE", SQLDataType.LOCALDATETIME)), this, "");
+
+    /**
+     * The column <code>public.owners.updated_at</code>.
+     */
+    public final TableField<OwnersRecord, LocalDateTime> UPDATED_AT = createField(DSL.name("updated_at"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_DATE", SQLDataType.LOCALDATETIME)), this, "");
 
     private Owners(Name alias, Table<OwnersRecord> aliased) {
         this(alias, aliased, null);
@@ -160,11 +171,11 @@ public class Owners extends TableImpl<OwnersRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row6 type methods
+    // Row8 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row6<Integer, String, String, String, String, String> fieldsRow() {
-        return (Row6) super.fieldsRow();
+    public Row8<Integer, String, String, String, String, String, LocalDateTime, LocalDateTime> fieldsRow() {
+        return (Row8) super.fieldsRow();
     }
 }

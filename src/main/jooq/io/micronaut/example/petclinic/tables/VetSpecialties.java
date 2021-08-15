@@ -8,6 +8,7 @@ import io.micronaut.example.petclinic.Keys;
 import io.micronaut.example.petclinic.Public;
 import io.micronaut.example.petclinic.tables.records.VetSpecialtiesRecord;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row2;
+import org.jooq.Row4;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -55,6 +56,16 @@ public class VetSpecialties extends TableImpl<VetSpecialtiesRecord> {
      * The column <code>public.vet_specialties.specialty_id</code>.
      */
     public final TableField<VetSpecialtiesRecord, Integer> SPECIALTY_ID = createField(DSL.name("specialty_id"), SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>public.vet_specialties.created_at</code>.
+     */
+    public final TableField<VetSpecialtiesRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_DATE", SQLDataType.LOCALDATETIME)), this, "");
+
+    /**
+     * The column <code>public.vet_specialties.updated_at</code>.
+     */
+    public final TableField<VetSpecialtiesRecord, LocalDateTime> UPDATED_AT = createField(DSL.name("updated_at"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_DATE", SQLDataType.LOCALDATETIME)), this, "");
 
     private VetSpecialties(Name alias, Table<VetSpecialtiesRecord> aliased) {
         this(alias, aliased, null);
@@ -143,11 +154,11 @@ public class VetSpecialties extends TableImpl<VetSpecialtiesRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row2 type methods
+    // Row4 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row2<Integer, Integer> fieldsRow() {
-        return (Row2) super.fieldsRow();
+    public Row4<Integer, Integer, LocalDateTime, LocalDateTime> fieldsRow() {
+        return (Row4) super.fieldsRow();
     }
 }

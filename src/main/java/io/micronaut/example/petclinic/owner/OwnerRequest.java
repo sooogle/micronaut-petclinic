@@ -34,7 +34,7 @@ record OwnerRequest(@NotEmpty @Size(max = 30) @Schema(name = "The first name of 
     }
 
     public Owners toEntity(Integer id) {
-        return new Owners(id, firstName, lastName, address, city, telephone);
+        return new Owners(id, firstName, lastName, address, city, telephone, null, null);
     }
 
 }

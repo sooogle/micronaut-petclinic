@@ -34,7 +34,7 @@ public record PetRequest(@NotNull @Size(max = 30) @Schema(description = "The nam
     }
 
     public Pets toEntity(Integer petId, Integer ownerId) {
-        return new Pets(petId, name, birthDate, typeId, ownerId);
+        return new Pets(petId, name, birthDate, typeId, ownerId, null, null);
     }
 
 }

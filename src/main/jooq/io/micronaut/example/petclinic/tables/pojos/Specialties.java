@@ -5,6 +5,7 @@ package io.micronaut.example.petclinic.tables.pojos;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 
 /**
@@ -15,22 +16,30 @@ public class Specialties implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
-    private String  name;
+    private Integer       id;
+    private String        name;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Specialties() {}
 
     public Specialties(Specialties value) {
         this.id = value.id;
         this.name = value.name;
+        this.createdAt = value.createdAt;
+        this.updatedAt = value.updatedAt;
     }
 
     public Specialties(
-        Integer id,
-        String  name
+        Integer       id,
+        String        name,
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
     ) {
         this.id = id;
         this.name = name;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     /**
@@ -63,12 +72,44 @@ public class Specialties implements Serializable {
         return this;
     }
 
+    /**
+     * Getter for <code>public.specialties.created_at</code>.
+     */
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    /**
+     * Setter for <code>public.specialties.created_at</code>.
+     */
+    public Specialties setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    /**
+     * Getter for <code>public.specialties.updated_at</code>.
+     */
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    /**
+     * Setter for <code>public.specialties.updated_at</code>.
+     */
+    public Specialties setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+        return this;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Specialties (");
 
         sb.append(id);
         sb.append(", ").append(name);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(updatedAt);
 
         sb.append(")");
         return sb.toString();

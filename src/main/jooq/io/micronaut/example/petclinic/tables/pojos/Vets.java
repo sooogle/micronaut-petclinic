@@ -5,6 +5,7 @@ package io.micronaut.example.petclinic.tables.pojos;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 
 /**
@@ -15,9 +16,11 @@ public class Vets implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
-    private String  firstName;
-    private String  lastName;
+    private Integer       id;
+    private String        firstName;
+    private String        lastName;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Vets() {}
 
@@ -25,16 +28,22 @@ public class Vets implements Serializable {
         this.id = value.id;
         this.firstName = value.firstName;
         this.lastName = value.lastName;
+        this.createdAt = value.createdAt;
+        this.updatedAt = value.updatedAt;
     }
 
     public Vets(
-        Integer id,
-        String  firstName,
-        String  lastName
+        Integer       id,
+        String        firstName,
+        String        lastName,
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
     ) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     /**
@@ -82,6 +91,36 @@ public class Vets implements Serializable {
         return this;
     }
 
+    /**
+     * Getter for <code>public.vets.created_at</code>.
+     */
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    /**
+     * Setter for <code>public.vets.created_at</code>.
+     */
+    public Vets setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    /**
+     * Getter for <code>public.vets.updated_at</code>.
+     */
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    /**
+     * Setter for <code>public.vets.updated_at</code>.
+     */
+    public Vets setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+        return this;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Vets (");
@@ -89,6 +128,8 @@ public class Vets implements Serializable {
         sb.append(id);
         sb.append(", ").append(firstName);
         sb.append(", ").append(lastName);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(updatedAt);
 
         sb.append(")");
         return sb.toString();
