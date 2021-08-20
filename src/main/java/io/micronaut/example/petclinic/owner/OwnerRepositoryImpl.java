@@ -26,16 +26,17 @@ import io.micronaut.core.util.StringUtils;
 import io.micronaut.example.petclinic.core.AbstractJooqRepository;
 import io.micronaut.example.petclinic.tables.pojos.Owners;
 import io.micronaut.example.petclinic.tables.records.OwnersRecord;
+import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
-import javax.inject.Singleton;
 import org.jooq.Condition;
 import org.jooq.Configuration;
 import org.jooq.Record7;
 import org.jooq.SelectJoinStep;
 
 @Singleton
-public class OwnerRepositoryImpl extends AbstractJooqRepository<OwnersRecord, Owners, Integer> implements OwnerRepository {
+public class OwnerRepositoryImpl extends AbstractJooqRepository<OwnersRecord, Owners, Integer>
+    implements OwnerRepository {
 
     protected OwnerRepositoryImpl(Configuration configuration) {
         super(OWNERS, Owners.class, configuration);

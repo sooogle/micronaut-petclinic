@@ -15,8 +15,8 @@
  */
 package io.micronaut.example.petclinic.core;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 import org.jooq.RecordListener;
 import org.jooq.impl.DefaultRecordListenerProvider;
 

@@ -20,7 +20,7 @@ import static io.micronaut.example.petclinic.Tables.PETS;
 import io.micronaut.example.petclinic.core.AbstractJooqRepository;
 import io.micronaut.example.petclinic.tables.pojos.Pets;
 import io.micronaut.example.petclinic.tables.records.PetsRecord;
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 import org.jooq.Configuration;
 
 @Singleton

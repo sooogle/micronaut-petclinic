@@ -22,8 +22,8 @@ import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.QueryValue;
 import io.micronaut.http.client.annotation.Client;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
+import jakarta.inject.Inject;
 import java.util.List;
-import javax.inject.Inject;
 import org.junit.jupiter.api.Test;
 
 @MicronautTest
@@ -37,7 +37,7 @@ public class VetControllerTest {
 
     @Test
     void testFindAll() {
-        var response = client.findAll( null, null);
+        var response = client.findAll(null, null);
         assertThat(response).hasSize((int) repository.count());
     }
 

@@ -31,7 +31,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import javax.validation.Valid;
 
-@Validated
 @Controller("/api/owners")
 class OwnerController {
 

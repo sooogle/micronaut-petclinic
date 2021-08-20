@@ -28,10 +28,10 @@ import io.micronaut.http.annotation.Put;
 import io.micronaut.http.annotation.QueryValue;
 import io.micronaut.http.client.annotation.Client;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
+import jakarta.inject.Inject;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.inject.Inject;
 import org.junit.jupiter.api.Test;
 
 @MicronautTest

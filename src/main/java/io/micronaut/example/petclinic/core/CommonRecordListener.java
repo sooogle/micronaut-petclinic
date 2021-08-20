@@ -15,10 +15,10 @@
  */
 package io.micronaut.example.petclinic.core;
 
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 import java.time.LocalDateTime;
 import java.util.Optional;
-import javax.inject.Named;
-import javax.inject.Singleton;
 import org.jooq.RecordContext;
 import org.jooq.impl.DefaultRecordListener;
 

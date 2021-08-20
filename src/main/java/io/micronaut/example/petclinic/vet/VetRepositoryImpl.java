@@ -28,9 +28,9 @@ import io.micronaut.example.petclinic.core.AbstractJooqRepository;
 import io.micronaut.example.petclinic.tables.pojos.Vets;
 import io.micronaut.example.petclinic.tables.records.VetsRecord;
 import io.micronaut.example.petclinic.vet.VetDTO.SpecialityDTO;
+import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
-import javax.inject.Singleton;
 import org.jooq.Condition;
 import org.jooq.Configuration;
 
