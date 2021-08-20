@@ -52,6 +52,13 @@ java {
 
 sourceSets.main.java.srcDirs += "src/main/jooq"
 
+// https://stackoverflow.com/a/4292739
+test {
+    afterTest { desc, result ->
+        logger.quiet "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+    }
+}
+
 jooq {
     configurations {
         main {
