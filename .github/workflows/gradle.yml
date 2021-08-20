@@ -23,7 +23,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Run tests
-        run: ./gradlew test
+        run: ./gradlew test --no-daemon
       - name: Cleanup Gradle Cache
         run: |
           rm -f ~/.gradle/caches/modules-2/modules-2.lock
