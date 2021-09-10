@@ -19,11 +19,14 @@ import io.micronaut.core.annotation.Nullable;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.QueryValue;
+import io.micronaut.scheduling.TaskExecutors;
+import io.micronaut.scheduling.annotation.ExecuteOn;
 import io.micronaut.transaction.annotation.TransactionalAdvice;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 
 @Controller("/api/vets")
+@ExecuteOn(TaskExecutors.IO)
 public class VetController {
 
     private final VetRepository repository;

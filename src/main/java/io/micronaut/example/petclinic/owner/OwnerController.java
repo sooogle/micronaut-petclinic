@@ -25,13 +25,15 @@ import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.Put;
 import io.micronaut.http.annotation.QueryValue;
+import io.micronaut.scheduling.TaskExecutors;
+import io.micronaut.scheduling.annotation.ExecuteOn;
 import io.micronaut.transaction.annotation.TransactionalAdvice;
-import io.micronaut.validation.Validated;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import javax.validation.Valid;
 
 @Controller("/api/owners")
+@ExecuteOn(TaskExecutors.IO)
 class OwnerController {
 
     private final OwnerRepository ownerRepository;
