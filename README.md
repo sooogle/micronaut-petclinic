@@ -5,7 +5,7 @@ Petclinic is a Micronaut port of the [spring-petclinic](https://github.com/sprin
 ## How it works
 
 - Java 16
-- Micronaut 2.5.12
+- Micronaut 3
 - jOOQ for repository implementation
 - Flyway for schema migration
 - OpenAPI specification
